@@ -41,6 +41,8 @@ var Engine = (function(global) {
     }
 
     function render() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
         var rowImages = [
                 'images/water-block.png',
                 'images/stone-block.png',

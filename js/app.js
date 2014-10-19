@@ -1,14 +1,14 @@
 // Enemies our player must avoid
-var Enemy = function(row) {
+var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.row = row;
+    this.row = Math.floor(Math.random()*3) + 1;
     this.x = -101;
-    this.y = row * 83 - 26;
+    this.y = this.row * 83 - 26;
     this.speed = 150 + Math.random()*300;
 }
 
@@ -21,6 +21,8 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 505) {
         this.x = -101;
         this.speed = 150 + Math.random()*300;
+        this.row = Math.floor(Math.random()*3) + 1;
+        this.y = this.row * 83 - 26;
     }
     this.x += dt * this.speed;
 }
@@ -50,7 +52,6 @@ Player.prototype.update = function() {
     allEnemies.forEach(function(enemy) {
         var eleft = enemy.x + 2,
             eright = enemy.x + 98;
-        console.log(row + " - " + enemy.row);
         if (row == enemy.row &&
             ((left < eright && left > eleft) ||
              (right > eleft && right < eright))
@@ -91,9 +92,9 @@ Player.prototype.handleInput = function(key) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [
-    new Enemy(1),
-    new Enemy(2),
-    new Enemy(3)
+    new Enemy(),
+    new Enemy(),
+    new Enemy()
     ];
 
 var player = new Player();
